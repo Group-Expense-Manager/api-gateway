@@ -1,4 +1,4 @@
-rootProject.name = "service-template"
+rootProject.name = "api-gateway"
 
 dependencyResolutionManagement {
     versionCatalogs {
@@ -51,23 +51,18 @@ dependencyResolutionManagement {
         }
         create("testlibs") {
             version("kotest", "5.8.1")
-            version("testcontainers", "1.19.7")
             library("kotest-runner-junit5", "io.kotest", "kotest-runner-junit5").versionRef("kotest")
             library("kotest-assertions-core", "io.kotest", "kotest-assertions-core").versionRef("kotest")
             library("kotest-assertions-json", "io.kotest", "kotest-assertions-json").versionRef("kotest")
             library("kotest-property", "io.kotest", "kotest-property").versionRef("kotest")
             library("kotest-framework-datatest", "io.kotest", "kotest-framework-datatest").versionRef("kotest")
-            library("kotest-testcontainers", "io.kotest.extensions", "kotest-extensions-testcontainers").version(
-                "2.0.2",
-            )
+
             library("mockito", "org.mockito.kotlin:mockito-kotlin:5.2.1")
             library("archunit", "com.tngtech.archunit:archunit-junit5:1.2.1")
 
             library("kotest-spring", "io.kotest.extensions:kotest-extensions-spring:1.1.3")
             library("kotest-wiremock", "io.kotest.extensions:kotest-extensions-wiremock:3.0.1")
             library("junit", "org.junit.jupiter:junit-jupiter-engine:5.10.2")
-            library("testcontainers-core", "org.testcontainers", "testcontainers").versionRef("testcontainers")
-            library("testcontainers-mongodb", "org.testcontainers", "mongodb").versionRef("testcontainers")
 
             bundle(
                 "kotest-core",
@@ -85,16 +80,6 @@ dependencyResolutionManagement {
                 listOf(
                     "kotest-spring",
                     "kotest-wiremock",
-                    "kotest-testcontainers",
-
-                ),
-            )
-
-            bundle(
-                "testcontainers",
-                listOf(
-                    "testcontainers-core",
-                    "testcontainers-mongodb",
                 ),
             )
         }

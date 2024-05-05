@@ -87,7 +87,6 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -99,7 +98,6 @@ dependencies {
 
     testImplementation(testlibs.bundles.kotest.core)
     testImplementation(testlibs.bundles.kotest.extensions)
-    testImplementation(testlibs.bundles.testcontainers)
     testImplementation(testlibs.mockito)
     testImplementation(testlibs.archunit)
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -188,17 +186,6 @@ tasks {
     }
     check {
         dependsOn("integration")
-    }
-
-    register("bootRunLocal") {
-        group = "application"
-        description = "Runs this project as a Spring Boot application with the local profile"
-        doFirst {
-            bootRun.configure {
-                systemProperty("spring.profiles.active", "local")
-            }
-        }
-        finalizedBy("bootRun")
     }
 
     getByName<Jar>("jar") {
