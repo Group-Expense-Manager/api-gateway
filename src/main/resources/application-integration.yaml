@@ -8,3 +8,6 @@ server:
 spring:
   main:
     allow-bean-definition-overriding: true
+
+uri:
+  authenticator:  http://localhost:${wiremock.server.port}

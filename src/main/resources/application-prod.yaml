@@ -1,0 +1,5 @@
+token:
+  secret-key: ${TOKEN_SECRET_KEY}
+
+uri:
+  authenticator: http://${AUTHENTICATOR_SERVICE_SERVICE_HOST}:8080

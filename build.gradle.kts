@@ -89,12 +89,16 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-aop")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springframework.cloud:spring-cloud-starter-gateway:4.1.3")
 
     implementation(libs.kotlinlogging)
     implementation(libs.lib.gem)
     implementation(libs.bundles.resilience4j)
+
+    implementation(libs.jsonwebtoken.jjwt.api)
+    runtimeOnly(libs.jsonwebtoken.jjwt.impl)
+    runtimeOnly(libs.jsonwebtoken.jjwt.jackson)
 
     testImplementation(testlibs.bundles.kotest.core)
     testImplementation(testlibs.bundles.kotest.extensions)
@@ -186,6 +190,17 @@ tasks {
     }
     check {
         dependsOn("integration")
+    }
+
+    register("bootRunLocal") {
+        group = "application"
+        description = "Runs this project as a Spring Boot application with the local profile"
+        doFirst {
+            bootRun.configure {
+                systemProperty("spring.profiles.active", "local")
+            }
+        }
+        finalizedBy("bootRun")
     }
 
     getByName<Jar>("jar") {
