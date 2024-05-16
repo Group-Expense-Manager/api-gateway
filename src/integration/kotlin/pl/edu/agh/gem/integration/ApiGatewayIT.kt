@@ -8,6 +8,9 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import pl.edu.agh.gem.assertion.shouldHaveHttpStatus
 import pl.edu.agh.gem.config.AcceptedHost.AUTHENTICATOR
 import pl.edu.agh.gem.integration.ability.stubMicroserviceWithEndpoint
+import pl.edu.agh.gem.paths.Paths.EXTERNAL
+import pl.edu.agh.gem.paths.Paths.INTERNAL
+import pl.edu.agh.gem.paths.Paths.OPEN
 import java.net.URI
 
 @AutoConfigureWebTestClient
@@ -17,7 +20,7 @@ class ApiGatewayIT(
     {
         should("not forward request when host is not accepted") {
             // given
-            val path = "/open/test"
+            val path = "$OPEN/test"
             val host = "non.existing.host"
             stubMicroserviceWithEndpoint(path)
 
@@ -33,7 +36,7 @@ class ApiGatewayIT(
 
         should("not forward request when path is /internal") {
             // given
-            val path = "/internal/test"
+            val path = "$INTERNAL/test"
             stubMicroserviceWithEndpoint(path)
 
             // when
@@ -48,7 +51,7 @@ class ApiGatewayIT(
 
         should("forward request when endpoint is open and host is accepted") {
             // given
-            val url = "/open/test"
+            val url = "$OPEN/test"
             stubMicroserviceWithEndpoint(url)
 
             // when
@@ -63,7 +66,7 @@ class ApiGatewayIT(
 
         should("not forward request when endpoint is external and host is accepted & no token was provided") {
             // given
-            val url = "/external/test"
+            val url = "$EXTERNAL/test"
             stubMicroserviceWithEndpoint(url)
 
             // when
@@ -78,7 +81,7 @@ class ApiGatewayIT(
 
         should("not forward request when endpoint is external and host is accepted & token is not valid") {
             // given
-            val url = "/external/test"
+            val url = "$EXTERNAL/test"
             stubMicroserviceWithEndpoint(url)
 
             // when

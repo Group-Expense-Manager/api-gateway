@@ -8,8 +8,8 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import pl.edu.agh.gem.config.AcceptedHost.AUTHENTICATOR
-import pl.edu.agh.gem.config.AcceptedPath.EXTERNAL
-import pl.edu.agh.gem.config.AcceptedPath.OPEN
+import pl.edu.agh.gem.paths.Paths.EXTERNAL
+import pl.edu.agh.gem.paths.Paths.OPEN
 
 @Configuration
 class GatewayConfig(

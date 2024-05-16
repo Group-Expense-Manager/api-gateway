@@ -8,8 +8,8 @@ import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.http.server.reactive.ServerHttpRequest
 import org.springframework.stereotype.Component
 import org.springframework.web.server.ServerWebExchange
-import pl.edu.agh.gem.config.AcceptedPath.EXTERNAL
 import pl.edu.agh.gem.headers.CustomHeaders.X_OAUTH_TOKEN_VALIDATED
+import pl.edu.agh.gem.paths.Paths.EXTERNAL
 import pl.edu.agh.gem.security.GemUser
 import pl.edu.agh.gem.security.JwtService
 import reactor.core.publisher.Mono

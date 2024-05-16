@@ -90,7 +90,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springframework.cloud:spring-cloud-starter-gateway:4.1.3")
+    implementation(libs.api.gateway)
 
     implementation(libs.kotlinlogging)
     implementation(libs.lib.gem)
