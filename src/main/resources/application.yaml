@@ -1,11 +1,14 @@
-resilience4j.retry:
-  configs:
-    default:
-      maxAttempts: 3
-      waitDuration: 100ms
-      enableExponentialBackoff: true
-      exponentialBackoffMultiplier: 2
-      retryExceptions:
-        - org.springframework.web.client.HttpServerErrorException
-        - java.io.IOException
-      ignoreExceptions: []
+token:
+  secret-key: 8692tg18dEq2twmv48AtiKWp3Qo/2nw6/tU6Rzttm9Q=
+
+spring:
+  main:
+    web-application-type: reactive
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+
+retry:
+  times: 3

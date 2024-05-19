@@ -30,10 +30,11 @@ dependencyResolutionManagement {
         create("libs") {
             version("spring-boot", "3.2.3")
             version("dependency-management", "1.1.4")
+            library("api-gateway", "org.springframework.cloud:spring-cloud-starter-gateway:4.1.3")
 
             library("guava", "com.google.guava:guava:33.1.0-jre")
             library("kotlinlogging", "io.github.microutils:kotlin-logging:3.0.5")
-            library("lib-gem", "pl.edu.agh.gem:lib-gem:0.1.3")
+            library("lib-gem", "pl.edu.agh.gem:lib-gem:0.1.6")
 
             version("resilience4j", "2.2.0")
             library("resilience4j-kotlin", "io.github.resilience4j", "resilience4j-kotlin").versionRef("resilience4j")
@@ -48,6 +49,11 @@ dependencyResolutionManagement {
                     "resilience4j-spring",
                 ),
             )
+
+            version("jsonwebtoken", "0.12.5")
+            library("jsonwebtoken-jjwt-api", "io.jsonwebtoken", "jjwt-api").versionRef("jsonwebtoken")
+            library("jsonwebtoken-jjwt-impl", "io.jsonwebtoken", "jjwt-impl").versionRef("jsonwebtoken")
+            library("jsonwebtoken-jjwt-jackson", "io.jsonwebtoken", "jjwt-jackson").versionRef("jsonwebtoken")
         }
         create("testlibs") {
             version("kotest", "5.8.1")
