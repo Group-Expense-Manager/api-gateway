@@ -11,3 +11,8 @@ spring:
 
 uri:
   authenticator:  http://localhost:${wiremock.server.port}
+  currency-manager: http://localhost:8080
+  group-manager: http://localhost:8080
+  expense-manager: http://localhost:8080
+  attachment-store: http://localhost:8080
+
