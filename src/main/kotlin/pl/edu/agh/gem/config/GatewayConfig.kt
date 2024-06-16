@@ -1,13 +1,16 @@
 package pl.edu.agh.gem.config
 
-import io.jsonwebtoken.io.IOException
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.cloud.gateway.route.RouteLocator
 import org.springframework.cloud.gateway.route.builder.PredicateSpec
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import pl.edu.agh.gem.config.AcceptedHost.ATTACHMENT_STORE
 import pl.edu.agh.gem.config.AcceptedHost.AUTHENTICATOR
+import pl.edu.agh.gem.config.AcceptedHost.CURRENCY_MANAGER
+import pl.edu.agh.gem.config.AcceptedHost.EXPENSE_MANAGER
+import pl.edu.agh.gem.config.AcceptedHost.GROUP_MANAGER
 import pl.edu.agh.gem.paths.Paths.EXTERNAL
 import pl.edu.agh.gem.paths.Paths.OPEN
 
@@ -20,25 +23,38 @@ class GatewayConfig(
     @Bean
     fun routes(builder: RouteLocatorBuilder, authFilter: TokenValidationGatewayFilterFactory): RouteLocator {
         return builder.routes()
-            .route { p: PredicateSpec ->
-                p
-                    .host(AUTHENTICATOR)
-                    .and()
-                    .path("$EXTERNAL/**", "$OPEN/**")
-                    .filters { f ->
-                        f
-                            .filter(authFilter.apply(TokenValidationGatewayFilterFactory.Config()))
-                            .retry { config -> config.setRetries(retryProperties.times).setExceptions(java.io.IOException::class.java) }
-                    }
-                    .uri(uriProperties.authenticator)
-            }
+            .route(authFilter, AUTHENTICATOR, uriProperties.authenticator)
+            .route(authFilter, CURRENCY_MANAGER, uriProperties.currencyManager)
+            .route(authFilter, GROUP_MANAGER, uriProperties.groupManager)
+            .route(authFilter, EXPENSE_MANAGER, uriProperties.expenseManager)
+            .route(authFilter, ATTACHMENT_STORE, uriProperties.attachmentStore)
             .build()
+    }
+
+    private fun RouteLocatorBuilder.Builder.route(authFilter: TokenValidationGatewayFilterFactory, host: String, routeToUrl: String):
+        RouteLocatorBuilder.Builder {
+        return route { p: PredicateSpec ->
+            p
+                .host(host)
+                .and()
+                .path("$EXTERNAL/**", "$OPEN/**")
+                .filters { f ->
+                    f
+                        .filter(authFilter.apply(TokenValidationGatewayFilterFactory.Config()))
+                        .retry { config -> config.setRetries(retryProperties.times).setExceptions(java.io.IOException::class.java) }
+                }
+                .uri(routeToUrl)
+        }
     }
 }
 
 @ConfigurationProperties(prefix = "uri")
 data class UriProperties(
     val authenticator: String,
+    val currencyManager: String,
+    val groupManager: String,
+    val expenseManager: String,
+    val attachmentStore: String,
 )
 
 @ConfigurationProperties(prefix = "retry")
