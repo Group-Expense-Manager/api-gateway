@@ -11,6 +11,7 @@ import pl.edu.agh.gem.config.AcceptedHost.AUTHENTICATOR
 import pl.edu.agh.gem.config.AcceptedHost.CURRENCY_MANAGER
 import pl.edu.agh.gem.config.AcceptedHost.EXPENSE_MANAGER
 import pl.edu.agh.gem.config.AcceptedHost.GROUP_MANAGER
+import pl.edu.agh.gem.config.AcceptedHost.USER_DETAILS_MANAGER
 import pl.edu.agh.gem.paths.Paths.EXTERNAL
 import pl.edu.agh.gem.paths.Paths.OPEN
 
@@ -28,6 +29,7 @@ class GatewayConfig(
             .route(authFilter, GROUP_MANAGER, uriProperties.groupManager)
             .route(authFilter, EXPENSE_MANAGER, uriProperties.expenseManager)
             .route(authFilter, ATTACHMENT_STORE, uriProperties.attachmentStore)
+            .route(authFilter, USER_DETAILS_MANAGER, uriProperties.userDetailsManager)
             .build()
     }
 
@@ -55,6 +57,7 @@ data class UriProperties(
     val groupManager: String,
     val expenseManager: String,
     val attachmentStore: String,
+    val userDetailsManager: String,
 )
 
 @ConfigurationProperties(prefix = "retry")

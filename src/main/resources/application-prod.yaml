@@ -7,5 +7,6 @@ uri:
   expense-manager: http://${EXPENSE_MANAGER_SERVICE_SERVICE_HOST}:8080
   currency-manager: http://${CURRENCY_MANAGER_SERVICE_SERVICE_HOST}:8080
   attachment-store: http://${ATTACHMENT_STORE_SERVICE_SERVICE_HOST}:8080
+  user-details-manager: http://${USER_DETAILS_MANAGER_SERVICE_SERVICE_HOST}:8080
 
 
