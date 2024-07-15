@@ -6,4 +6,5 @@ object AcceptedHost {
     const val CURRENCY_MANAGER = "gem.web.currency-manager.com"
     const val EXPENSE_MANAGER = "gem.web.expense-manager.com"
     const val ATTACHMENT_STORE = "gem.web.attachment-store.com"
+    const val USER_DETAILS_MANAGER = "gem.web.user-details-manager.com"
 }
