@@ -16,4 +16,4 @@ uri:
   expense-manager: http://localhost:8080
   attachment-store: http://localhost:8080
   user-details-manager: http://localhost:8080
-
+  finance-adapter: http://localhost:8080
