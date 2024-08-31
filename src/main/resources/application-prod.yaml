@@ -9,5 +9,6 @@ uri:
   attachment-store: http://${ATTACHMENT_STORE_SERVICE_SERVICE_HOST}:8080
   user-details-manager: http://${USER_DETAILS_MANAGER_SERVICE_SERVICE_HOST}:8080
   finance-adapter: http://${FINANCE_ADAPTER_SERVICE_SERVICE_HOST}:8080
+  payment-manager: http://${PAYMENT_MANAGER_SERVICE_SERVICE_HOST}:8080
 
 
