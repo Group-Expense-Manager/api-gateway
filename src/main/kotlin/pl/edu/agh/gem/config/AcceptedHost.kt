@@ -9,4 +9,5 @@ object AcceptedHost {
     const val USER_DETAILS_MANAGER = "gem.web.user-details-manager.com"
     const val FINANCE_ADAPTER = "gem.web.finance-adapter.com"
     const val PAYMENT_MANAGER = "gem.web.payment-manager.com"
+    const val REPORT_CREATOR = "gem.web.report-creator.com"
 }
