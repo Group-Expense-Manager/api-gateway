@@ -18,3 +18,5 @@ uri:
   user-details-manager: http://localhost:8080
   finance-adapter: http://localhost:8080
   payment-manager: http://localhost:8080
+  report-creator: http://localhost:8080
+

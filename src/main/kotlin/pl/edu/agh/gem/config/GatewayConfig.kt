@@ -13,6 +13,7 @@ import pl.edu.agh.gem.config.AcceptedHost.EXPENSE_MANAGER
 import pl.edu.agh.gem.config.AcceptedHost.FINANCE_ADAPTER
 import pl.edu.agh.gem.config.AcceptedHost.GROUP_MANAGER
 import pl.edu.agh.gem.config.AcceptedHost.PAYMENT_MANAGER
+import pl.edu.agh.gem.config.AcceptedHost.REPORT_CREATOR
 import pl.edu.agh.gem.config.AcceptedHost.USER_DETAILS_MANAGER
 import pl.edu.agh.gem.paths.Paths.EXTERNAL
 import pl.edu.agh.gem.paths.Paths.OPEN
@@ -34,6 +35,7 @@ class GatewayConfig(
             .route(authFilter, USER_DETAILS_MANAGER, uriProperties.userDetailsManager)
             .route(authFilter, FINANCE_ADAPTER, uriProperties.financeAdapter)
             .route(authFilter, PAYMENT_MANAGER, uriProperties.paymentManager)
+            .route(authFilter, REPORT_CREATOR, uriProperties.reportCreator)
             .build()
     }
 
@@ -64,6 +66,8 @@ data class UriProperties(
     val userDetailsManager: String,
     val financeAdapter: String,
     val paymentManager: String,
+    val reportCreator: String,
+
 )
 
 @ConfigurationProperties(prefix = "retry")
