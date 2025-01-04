@@ -23,9 +23,11 @@ class GatewayConfig(
     private val uriProperties: UriProperties,
     private val retryProperties: RetryProperties,
 ) {
-
     @Bean
-    fun routes(builder: RouteLocatorBuilder, authFilter: TokenValidationGatewayFilterFactory): RouteLocator {
+    fun routes(
+        builder: RouteLocatorBuilder,
+        authFilter: TokenValidationGatewayFilterFactory,
+    ): RouteLocator {
         return builder.routes()
             .route(authFilter, AUTHENTICATOR, uriProperties.authenticator)
             .route(authFilter, CURRENCY_MANAGER, uriProperties.currencyManager)
@@ -39,8 +41,11 @@ class GatewayConfig(
             .build()
     }
 
-    private fun RouteLocatorBuilder.Builder.route(authFilter: TokenValidationGatewayFilterFactory, host: String, routeToUrl: String):
-        RouteLocatorBuilder.Builder {
+    private fun RouteLocatorBuilder.Builder.route(
+        authFilter: TokenValidationGatewayFilterFactory,
+        host: String,
+        routeToUrl: String,
+    ): RouteLocatorBuilder.Builder {
         return route { p: PredicateSpec ->
             p
                 .host(host)
@@ -67,7 +72,6 @@ data class UriProperties(
     val financeAdapter: String,
     val paymentManager: String,
     val reportCreator: String,
-
 )
 
 @ConfigurationProperties(prefix = "retry")

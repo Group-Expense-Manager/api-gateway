@@ -8,7 +8,10 @@ import org.springframework.http.HttpStatusCode
 import pl.edu.agh.gem.headers.HeadersTestUtils.withAppContentType
 import pl.edu.agh.gem.integration.environment.ProjectConfig
 
-fun stubMicroserviceWithEndpoint(url: String, statusCode: HttpStatusCode = HttpStatus.OK) {
+fun stubMicroserviceWithEndpoint(
+    url: String,
+    statusCode: HttpStatusCode = HttpStatus.OK,
+) {
     ProjectConfig.wiremock.stubFor(
         post(urlMatching(url))
             .willReturn(
