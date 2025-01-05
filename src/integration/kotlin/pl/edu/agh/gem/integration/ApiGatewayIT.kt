@@ -17,82 +17,87 @@ import java.net.URI
 class ApiGatewayIT(
     private val webClient: WebTestClient,
 ) : BaseIntegrationSpec(
-    {
-        should("not forward request when host is not accepted") {
-            // given
-            val path = "$OPEN/test"
-            val host = "non.existing.host"
-            stubMicroserviceWithEndpoint(path)
+        {
+            should("not forward request when host is not accepted") {
+                // given
+                val path = "$OPEN/test"
+                val host = "non.existing.host"
+                stubMicroserviceWithEndpoint(path)
 
-            // when
-            val response = webClient.post()
-                .uri(URI(path))
-                .header("Host", host)
-                .exchange()
+                // when
+                val response =
+                    webClient.post()
+                        .uri(URI(path))
+                        .header("Host", host)
+                        .exchange()
 
-            // then
-            response shouldHaveHttpStatus NOT_FOUND
-        }
+                // then
+                response shouldHaveHttpStatus NOT_FOUND
+            }
 
-        should("not forward request when path is /internal") {
-            // given
-            val path = "$INTERNAL/test"
-            stubMicroserviceWithEndpoint(path)
+            should("not forward request when path is /internal") {
+                // given
+                val path = "$INTERNAL/test"
+                stubMicroserviceWithEndpoint(path)
 
-            // when
-            val response = webClient.post()
-                .uri(URI(path))
-                .header("Host", AUTHENTICATOR)
-                .exchange()
+                // when
+                val response =
+                    webClient.post()
+                        .uri(URI(path))
+                        .header("Host", AUTHENTICATOR)
+                        .exchange()
 
-            // then
-            response shouldHaveHttpStatus NOT_FOUND
-        }
+                // then
+                response shouldHaveHttpStatus NOT_FOUND
+            }
 
-        should("forward request when endpoint is open and host is accepted") {
-            // given
-            val url = "$OPEN/test"
-            stubMicroserviceWithEndpoint(url)
+            should("forward request when endpoint is open and host is accepted") {
+                // given
+                val url = "$OPEN/test"
+                stubMicroserviceWithEndpoint(url)
 
-            // when
-            val response = webClient.post()
-                .uri(URI(url))
-                .header("Host", AUTHENTICATOR)
-                .exchange()
+                // when
+                val response =
+                    webClient.post()
+                        .uri(URI(url))
+                        .header("Host", AUTHENTICATOR)
+                        .exchange()
 
-            // then
-            response shouldHaveHttpStatus OK
-        }
+                // then
+                response shouldHaveHttpStatus OK
+            }
 
-        should("not forward request when endpoint is external and host is accepted & no token was provided") {
-            // given
-            val url = "$EXTERNAL/test"
-            stubMicroserviceWithEndpoint(url)
+            should("not forward request when endpoint is external and host is accepted & no token was provided") {
+                // given
+                val url = "$EXTERNAL/test"
+                stubMicroserviceWithEndpoint(url)
 
-            // when
-            val response = webClient.post()
-                .uri(URI(url))
-                .header("Host", AUTHENTICATOR)
-                .exchange()
+                // when
+                val response =
+                    webClient.post()
+                        .uri(URI(url))
+                        .header("Host", AUTHENTICATOR)
+                        .exchange()
 
-            // then
-            response shouldHaveHttpStatus UNAUTHORIZED
-        }
+                // then
+                response shouldHaveHttpStatus UNAUTHORIZED
+            }
 
-        should("not forward request when endpoint is external and host is accepted & token is not valid") {
-            // given
-            val url = "$EXTERNAL/test"
-            stubMicroserviceWithEndpoint(url)
+            should("not forward request when endpoint is external and host is accepted & token is not valid") {
+                // given
+                val url = "$EXTERNAL/test"
+                stubMicroserviceWithEndpoint(url)
 
-            // when
-            val response = webClient.post()
-                .uri(URI(url))
-                .header("Host", AUTHENTICATOR)
-                .header("Authorization", "Bearer some_token")
-                .exchange()
+                // when
+                val response =
+                    webClient.post()
+                        .uri(URI(url))
+                        .header("Host", AUTHENTICATOR)
+                        .header("Authorization", "Bearer some_token")
+                        .exchange()
 
-            // then
-            response shouldHaveHttpStatus UNAUTHORIZED
-        }
-    },
-)
+                // then
+                response shouldHaveHttpStatus UNAUTHORIZED
+            }
+        },
+    )

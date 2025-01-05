@@ -18,7 +18,6 @@ import reactor.core.publisher.Mono
 class TokenValidationGatewayFilterFactory(
     private val jwtService: JwtService,
 ) : AbstractGatewayFilterFactory<TokenValidationGatewayFilterFactory.Config>() {
-
     override fun apply(config: Config): GatewayFilter {
         return GatewayFilter { exchange, chain ->
             val request = exchange.request
@@ -41,11 +40,13 @@ class TokenValidationGatewayFilterFactory(
         }
     }
 
-    private fun addGemUserToHeader(exchange: ServerWebExchange, user: GemUser) =
-        exchange.request
-            .mutate()
-            .header(X_OAUTH_TOKEN_VALIDATED, jacksonObjectMapper().writeValueAsString(user))
-            .build()
+    private fun addGemUserToHeader(
+        exchange: ServerWebExchange,
+        user: GemUser,
+    ) = exchange.request
+        .mutate()
+        .header(X_OAUTH_TOKEN_VALIDATED, jacksonObjectMapper().writeValueAsString(user))
+        .build()
 
     private fun extractGemUser(authorization: String): GemUser {
         val token = authorization.substringAfter(" ")
@@ -58,8 +59,7 @@ class TokenValidationGatewayFilterFactory(
         return exchange.response.setComplete()
     }
 
-    private fun extractAuthorization(request: ServerHttpRequest) =
-        request.headers.getFirst("Authorization")
+    private fun extractAuthorization(request: ServerHttpRequest) = request.headers.getFirst("Authorization")
 
     class AuthorizationException : RuntimeException("Authorization header not present")
 
